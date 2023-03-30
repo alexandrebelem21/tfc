@@ -3,8 +3,9 @@ import Teams from '../database/models/teamsModel';
 
 export default class TeamService {
   private _teamModel: ModelStatic<Teams>;
-  constructor(model: ModelStatic<Teams>) {
-    this._teamModel = model;
+
+  constructor(teamModel: ModelStatic<Teams>) {
+    this._teamModel = teamModel;
   }
 
   public async getAll(): Promise<Teams[]> {
