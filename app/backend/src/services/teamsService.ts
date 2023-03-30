@@ -1,4 +1,5 @@
 import { ModelStatic } from 'sequelize';
+import { ITeam } from '../interfaces/ITeam';
 import Teams from '../database/models/teamsModel';
 
 export default class TeamService {
@@ -8,12 +9,12 @@ export default class TeamService {
     this._teamModel = teamModel;
   }
 
-  public async getAll(): Promise<Teams[]> {
+  public async getAll(): Promise<ITeam[]> {
     const result = await this._teamModel.findAll();
     return result;
   }
 
-  public async getById(id: number): Promise<Teams | null> {
+  public async getById(id: number): Promise<ITeam | null> {
     const result = await this._teamModel.findByPk(id);
     return result;
   }
