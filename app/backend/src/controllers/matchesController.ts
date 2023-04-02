@@ -1,11 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import MatchService from '../services/matchesService';
+import TeamService from '../services/teamsService';
 
 export default class MatchController {
   private _matchService: MatchService;
+  private _teamService: TeamService;
 
-  constructor(matchService: MatchService) {
+  constructor(matchService: MatchService, teamService: TeamService) {
     this._matchService = matchService;
+    this._teamService = teamService;
   }
 
   public getAll = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -53,6 +56,7 @@ export default class MatchController {
         homeTeamGoals,
         awayTeamGoals,
       );
+      console.log('oooooi');
       res.status(201).json({ id: create.id,
         homeTeamId,
         awayTeamId,
