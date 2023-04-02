@@ -57,4 +57,15 @@ export default class MatchService {
       await result.save();
     }
   }
+
+  public async updateGoals(
+    id: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ): Promise<void> {
+    const result = await this._matchModel.findByPk(id);
+    if (result && result.inProgress) {
+      await result.update({ homeTeamGoals, awayTeamGoals });
+    }
+  }
 }

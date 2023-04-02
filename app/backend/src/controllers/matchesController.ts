@@ -32,4 +32,15 @@ export default class MatchController {
       next(error);
     }
   };
+
+  public updateGoals = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    try {
+      await this._matchService.updateGoals(Number(id), homeTeamGoals, awayTeamGoals);
+      res.status(200).json({});
+    } catch (error) {
+      next(error);
+    }
+  };
 }
