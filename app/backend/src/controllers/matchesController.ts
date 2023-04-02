@@ -22,4 +22,14 @@ export default class MatchController {
       next(error);
     }
   };
+
+  public getById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const { id } = req.params;
+    try {
+      await this._matchService.getById(Number(id));
+      res.status(200).json({ message: 'Finished' });
+    } catch (error) {
+      next(error);
+    }
+  };
 }

@@ -49,4 +49,12 @@ export default class MatchService {
 
     return allMatches;
   }
+
+  public async getById(id: number): Promise<void> {
+    const result = await this._matchModel.findByPk(id);
+    if (result) {
+      (result.inProgress = false);
+      await result.save();
+    }
+  }
 }
