@@ -43,4 +43,24 @@ export default class MatchController {
       next(error);
     }
   };
+
+  public createMatch = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = req.body;
+    try {
+      const create = await this._matchService.createMatch(
+        homeTeamId,
+        awayTeamId,
+        homeTeamGoals,
+        awayTeamGoals,
+      );
+      res.status(201).json({ id: create.id,
+        homeTeamId,
+        awayTeamId,
+        homeTeamGoals,
+        awayTeamGoals,
+        inProgress: true });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
