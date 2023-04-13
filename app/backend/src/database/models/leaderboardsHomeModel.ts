@@ -20,13 +20,13 @@ export default class LeaderboardsHome implements ILeaderboard {
     this.team = team;
     this.matches = matches;
     this.name = team.teamName;
-    this.totalGames = this.TotalGames() + this.TotalGamesA();
-    this.totalVictories = this.TotalVictories() + this.TotalVictoriesA();
-    this.totalDraws = this.TotalDraws() + this.TotalDrawsA();
+    this.totalGames = this.TotalGames();
+    this.totalVictories = this.TotalVictories();
+    this.totalDraws = this.TotalDraws();
     this.totalPoints = (this.totalVictories * 3) + this.totalDraws;
-    this.totalLosses = this.TotalLosses() + this.TotalLossesA();
-    this.goalsFavor = this.GoalsFavor() + this.GoalsFavorA();
-    this.goalsOwn = this.GoalsOwn() + this.GoalsOwnA();
+    this.totalLosses = this.TotalLosses();
+    this.goalsFavor = this.GoalsFavor();
+    this.goalsOwn = this.GoalsOwn();
     this.goalsBalance = this.goalsFavor - this.goalsOwn;
     this.efficiency = parseFloat(((this.totalPoints / (this.totalGames * 3)) * 100).toFixed(2));
   }
@@ -98,78 +98,6 @@ export default class LeaderboardsHome implements ILeaderboard {
     return this.matches.reduce((total, el) => {
       if (this.team?.id === el.homeTeamId && el.inProgress === false) {
         return total + el.awayTeamGoals;
-      }
-      return total;
-    }, 0);
-  }
-
-  public TotalGamesA() {
-    if (!this.matches) {
-      return 0;
-    }
-    return this.matches.reduce((total, el) => {
-      if (this.team?.id === el.awayTeamId && el.inProgress === false) {
-        return total + 1;
-      }
-      return total;
-    }, 0);
-  }
-
-  public TotalVictoriesA() {
-    if (!this.matches) {
-      return 0;
-    }
-    return this.matches.reduce((total, el) => {
-      if (this.team?.id === el.awayTeamId && el.awayTeamGoals > el.homeTeamGoals) {
-        return total + 1;
-      }
-      return total;
-    }, 0);
-  }
-
-  public TotalDrawsA() {
-    if (!this.matches) {
-      return 0;
-    }
-    return this.matches.reduce((total, el) => {
-      if (this.team?.id === el.awayTeamId && el.homeTeamGoals === el.awayTeamGoals) {
-        return total + 1;
-      }
-      return total;
-    }, 0);
-  }
-
-  public TotalLossesA() {
-    if (!this.matches) {
-      return 0;
-    }
-    return this.matches.reduce((total, el) => {
-      if (this.team?.id === el.awayTeamId && el.awayTeamGoals < el.homeTeamGoals) {
-        return total + 1;
-      }
-      return total;
-    }, 0);
-  }
-
-  public GoalsFavorA() {
-    if (!this.matches) {
-      return 0;
-    }
-    return this.matches.reduce((total, el) => {
-      if (this.team?.id === el.awayTeamId && el.inProgress === false) {
-        return total + el.awayTeamGoals;
-      }
-      return total;
-    }, 0);
-  }
-
-  public GoalsOwnA() {
-    if (!this.matches) {
-      return 0;
-    }
-    return this.matches.reduce((total, el) => {
-      if (this.team?.id === el.awayTeamId && el.inProgress === false) {
-        return total + el.homeTeamGoals;
       }
       return total;
     }, 0);
