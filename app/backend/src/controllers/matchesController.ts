@@ -56,7 +56,6 @@ export default class MatchController {
         homeTeamGoals,
         awayTeamGoals,
       );
-      console.log('oooooi');
       res.status(201).json({ id: create.id,
         homeTeamId,
         awayTeamId,
